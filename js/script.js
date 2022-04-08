@@ -5,7 +5,7 @@ const guessedLetters = document.querySelector("ul");
 const guessButton = document.querySelector(".guess");
 
 //text input where player will guess a letter
-const guessBox = document.querySelector(".guess-form");
+const guessLetter = document.querySelector(".letter");
 
 //paragraph where word in progress will appear
 const currentWord = document.querySelector(".word-in-progress");
@@ -25,12 +25,22 @@ const playAgainButton = document.querySelector(".play-again");
 //test word
 const word = "magnolia";
 
-const circle = function () {
-    //creates an array of the individual letters of the word
-    const letters = word.split("");
+const blankWord = function (word) {
+    lettersArray = [];
+    for (let letter of word) {
+        lettersArray.push("●");
+    };
+    currentWord.innerText = lettersArray.join("");
 };
 
-circle(word);
+blankWord(word);
+
+guessButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    const guess = guessLetter.value;
+    console.log(guess);
+    guessLetter.value = "";
+});
 
 
 
