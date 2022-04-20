@@ -24,8 +24,10 @@ const playAgainButton = document.querySelector(".play-again");
 
 //test word
 const word = "magnolia";
+//array to hold a player's guessed letters
 const guessedLetters = [];
 
+//function to create the circles that stand-in for the word being guessed
 const blankWord = function (word) {
     lettersArray = [];
     for (let letter of word) {
@@ -36,6 +38,7 @@ const blankWord = function (word) {
 
 blankWord(word);
 
+//everything that happens when you click the "Guess" button
 guessButton.addEventListener("click", function (e) {
     e.preventDefault();
     const guess = guessLetter.value;
@@ -47,6 +50,7 @@ guessButton.addEventListener("click", function (e) {
     makeGuess(guess);
 });
 
+//function to check player's input and make sure it's a single alphabetical letter
 const validate = function (input) {
     const acceptedLetter = /[a-zA-Z]/;
     if (input.length === 0) {
@@ -60,12 +64,42 @@ const validate = function (input) {
     }
 };
 
+//function to capture the input
 const makeGuess = function (guess) {
     guess = guess.toUpperCase();
     if (guessedLetters.includes(guess)) {
         message.innerText = "You've already guessed that letter."
     } else {
         guessedLetters.push(guess);
+        updateLetters();
+        updateWord(guessedLetters);
     }
     console.log(guessedLetters);
 };
+
+//function to show the guessed letters on the screen
+const updateLetters = function () {
+    guessedList.innerHTML = "";
+    for (let letter of guessedLetters) {
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedList.append(li);
+    };    
+};
+
+//function to replace the circles with the correct letter as they're guessed
+const updateWord = function (guessedLetters) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const revealLetter = [];
+    for (let letter of wordArray) {
+        if (guessedLetters.includes(letter)) {
+            revealLetter.push(letter.toUpperCase());
+        } else {
+            revealLetter.push("●");
+        }
+    }
+    currentWord.innerText = revealLetter.join("");
+};
+
+//function to check if the player has won
