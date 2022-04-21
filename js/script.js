@@ -100,6 +100,13 @@ const updateWord = function (guessedLetters) {
         }
     }
     currentWord.innerText = revealLetter.join("");
+    checkWin();
 };
 
 //function to check if the player has won
+const checkWin = function () {
+    if (currentWord.innerText === word.toUpperCase()) {
+        message.classList.add("win");
+        message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`
+    }
+}
