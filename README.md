@@ -1,6 +1,6 @@
 # Skillcrush - Guess the Word Game
 
-This is a solution to the [Skillcrush Guess the Word Game](https://learn.skillcrush.com). 
+This is the code to the [Skillcrush Guess the Word Game](https://learn.skillcrush.com). 
 
 ## Table of contents
 
